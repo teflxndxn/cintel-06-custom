@@ -2,12 +2,15 @@ from shiny import App, ui, render, reactive, req
 import pandas as pd
 import matplotlib.pyplot as plt
 
+CSV_URL = "https://raw.githubusercontent.com/teflxndxn/cintel-06-custom/main/dashboard/flights.csv"
+
 # ---------------------------
-# Reactive File Reader
+# Reactive function to read flights data from URL
 # ---------------------------
-@reactive.file_reader("dashboard/flights.csv")
+@reactive.Calc
 def read_flights():
-    return pd.read_csv("dashboard/flights.csv")  # Make sure this path matches the decorator
+    # Reads CSV from URL on each reactive call
+    return pd.read_csv(CSV_URL)
 
 # ---------------------------
 # UI Layout
@@ -45,7 +48,6 @@ def server(input, output, session):
         df = read_flights()
         req(input.year())
         req(input.months())
-
         return df[
             (df["year"] == int(input.year())) &
             (df["month"].isin(input.months()))
