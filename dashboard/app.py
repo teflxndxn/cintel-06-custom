@@ -1,12 +1,13 @@
 from shiny import App, ui, render, reactive, req
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # ---------------------------
 # Reactive File Reader
 # ---------------------------
 @reactive.file_reader("dashboard/flights.csv")
 def read_flights():
-    return pd.read_csv("dashboard/flights.csv")
+    return pd.read_csv("dashboard/flights.csv")  # Make sure this path matches the decorator
 
 # ---------------------------
 # UI Layout
@@ -19,7 +20,7 @@ app_ui = ui.page_sidebar(
     ui.layout_column_wrap(
         ui.h2("Flights Dashboard"),
         ui.output_text("selection_text"),
-        ui.output_text("total_passengers"),      # Added total passengers output here
+        ui.output_text("total_passengers"),
         ui.output_data_frame("filtered_table"),
         ui.output_plot("passenger_plot"),
     ),
@@ -70,9 +71,7 @@ def server(input, output, session):
     @output
     @render.plot
     def passenger_plot():
-        import matplotlib.pyplot as plt
         df = filtered_data()
-
         fig, ax = plt.subplots()
         ax.bar(df["month"], df["passengers"])
         ax.set_title(f"Passengers in {input.year()}")
