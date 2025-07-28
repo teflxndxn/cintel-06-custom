@@ -4,9 +4,9 @@ import pandas as pd
 # ---------------------------
 # Reactive File Reader
 # ---------------------------
-@reactive.file_reader("flights.csv")
+@reactive.file_reader("dashboard/flights.csv")
 def read_flights():
-    return pd.read_csv("flights.csv")
+    return pd.read_csv("dashboard/flights.csv")
 
 # ---------------------------
 # UI Layout
