@@ -19,6 +19,7 @@ app_ui = ui.page_sidebar(
     ui.layout_column_wrap(
         ui.h2("Flights Dashboard"),
         ui.output_text("selection_text"),
+        ui.output_text("total_passengers"),      # Added total passengers output here
         ui.output_data_frame("filtered_table"),
         ui.output_plot("passenger_plot"),
     ),
@@ -53,6 +54,13 @@ def server(input, output, session):
     @render.text
     def selection_text():
         return f"Showing data for year {input.year()} and months {', '.join(input.months())}"
+
+    @output
+    @render.text
+    def total_passengers():
+        df = filtered_data()
+        total = df["passengers"].sum()
+        return f"Total Passengers: {total:,}"
 
     @output
     @render.data_frame

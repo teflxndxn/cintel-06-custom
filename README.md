@@ -6,6 +6,17 @@ Custom PyShiny app with interactive filters and visualizations
 
 This project is a custom interactive dashboard built with **PyShiny** to explore airline passenger data (`flights.csv`). Users can filter data by **year** and **months** and visualize passenger counts dynamically. It demonstrates reactive programming and continuous intelligence concepts using the `reactive.file_reader` feature.
 
+This app lets users explore the historical airline passenger dataset (`flights.csv`) with these key functionalities:
+
+- Reactive filtering of the dataset by **Year** (dropdown) and **Months** (checkbox group).
+- Display of a **text summary** showing the selected filters.
+- A **data table** presenting the filtered records dynamically.
+- A **bar chart** visualizing monthly passenger counts based on the current selection.
+- A **summary text** showing the total number of passengers for the selected filters.
+- Utilizes `reactive.file_reader` to automatically reload the data if the CSV file changes on disk.
+
+The app demonstrates core concepts of reactive programming and data visualization in PyShiny, focusing on filtering Pandas DataFrames and rendering updated visual outputs based on user input.
+
 ---
 
 ## Features
@@ -47,8 +58,6 @@ flights.csv — Data file with flights passenger information
 requirements.txt — Python dependencies
 README.md — This documentation file
 docs/ — Optional exported app assets for static hosting
-
-
 
 ## API References
 
